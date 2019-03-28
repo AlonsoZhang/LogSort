@@ -7,8 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ViewDropper.h"
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController<DragShowStationDelegate>{
+    
+}
 
 
 @end

@@ -12,6 +12,7 @@
 		0CD871EC224CA3B3004DB681 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CD871EB224CA3B3004DB681 /* Assets.xcassets */; };
 		0CD871EF224CA3B3004DB681 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CD871ED224CA3B3004DB681 /* Main.storyboard */; };
 		0CD871F2224CA3B3004DB681 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD871F1224CA3B3004DB681 /* main.m */; };
+		0CD871FB224CA475004DB681 /* ViewDropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD871FA224CA475004DB681 /* ViewDropper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,8 @@
 		0CD871F0224CA3B3004DB681 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CD871F1224CA3B3004DB681 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0CD871F3224CA3B3004DB681 /* LogSort.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LogSort.entitlements; sourceTree = "<group>"; };
+		0CD871F9224CA475004DB681 /* ViewDropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewDropper.h; sourceTree = "<group>"; };
+		0CD871FA224CA475004DB681 /* ViewDropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewDropper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,8 @@
 				0CD871E6224CA3B1004DB681 /* AppDelegate.m */,
 				0CD871E8224CA3B1004DB681 /* ViewController.h */,
 				0CD871E9224CA3B1004DB681 /* ViewController.m */,
+				0CD871F9224CA475004DB681 /* ViewDropper.h */,
+				0CD871FA224CA475004DB681 /* ViewDropper.m */,
 				0CD871EB224CA3B3004DB681 /* Assets.xcassets */,
 				0CD871ED224CA3B3004DB681 /* Main.storyboard */,
 				0CD871F0224CA3B3004DB681 /* Info.plist */,
@@ -142,6 +147,7 @@
 				0CD871EA224CA3B1004DB681 /* ViewController.m in Sources */,
 				0CD871F2224CA3B3004DB681 /* main.m in Sources */,
 				0CD871E7224CA3B1004DB681 /* AppDelegate.m in Sources */,
+				0CD871FB224CA475004DB681 /* ViewDropper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
