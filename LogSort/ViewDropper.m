@@ -18,6 +18,7 @@
 
 // Stop the NSView implementation getting in the way
 - (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender {
+    
     return [self draggingEntered:sender];
 }
 

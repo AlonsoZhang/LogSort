@@ -10,9 +10,15 @@
 #import "ViewDropper.h"
 
 @interface ViewController : NSViewController<DragShowStationDelegate>{
-    
+    NSMutableArray *LogArray;
+    NSMutableArray *LogPathArray;
 }
 
+@property (strong) IBOutlet ViewDropper *viewDropper;
+@property (weak) IBOutlet NSTableView *logNameTableView;
+@property (weak) IBOutlet NSTextField *infoMessage;
+- (IBAction)reset:(NSButton *)sender;
+- (IBAction)sort:(NSButton *)sender;
 
 @end
 
