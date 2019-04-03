@@ -688,8 +688,9 @@
                     <window key="window" title="Sort Log Timestamp" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="426" height="460"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="426" height="300"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -700,30 +701,30 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="74" y="333"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl" customClass="ViewDropper">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="426" height="460"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCe-9R-RXM">
-                                <rect key="frame" x="20" y="56" width="440" height="384"/>
+                                <rect key="frame" x="20" y="91" width="386" height="349"/>
                                 <clipView key="contentView" id="TYO-XB-gPi">
-                                    <rect key="frame" x="1" y="0.0" width="438" height="383"/>
+                                    <rect key="frame" x="1" y="0.0" width="384" height="348"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="CPa-55-mAf" id="cja-8m-jtx">
-                                            <rect key="frame" x="0.0" y="0.0" width="438" height="360"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384" height="325"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="logName" width="435" minWidth="40" maxWidth="1000" id="R1w-B4-b2u">
+                                                <tableColumn identifier="logName" width="381" minWidth="40" maxWidth="1000" id="R1w-B4-b2u">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Log Name">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -753,7 +754,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="CPa-55-mAf">
-                                    <rect key="frame" x="0.0" y="0.0" width="438" height="23"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="384" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -769,7 +770,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pcg-UB-Itg">
-                                <rect key="frame" x="400" y="13" width="66" height="32"/>
+                                <rect key="frame" x="346" y="13" width="66" height="32"/>
                                 <buttonCell key="cell" type="push" title="Sort" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="N1A-tG-gCT">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -779,7 +780,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xqK-no-UJG">
-                                <rect key="frame" x="317" y="13" width="75" height="32"/>
+                                <rect key="frame" x="263" y="13" width="75" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3TS-fN-guJ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -788,29 +789,118 @@
                                     <action selector="reset:" target="XfG-lQ-9wD" id="pMG-2P-sd1"/>
                                 </connections>
                             </button>
+                            <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I6Q-oF-GfF">
+                                <rect key="frame" x="20" y="49" width="128" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="tlN-xn-lMl"/>
+                                </constraints>
+                                <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="textField" id="sqp-VZ-ktT">
+                                    <font key="font" metaFont="system"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="575740800">
+                                        <!--2019-03-31 16:00:00 +0000-->
+                                    </date>
+                                    <date key="minDate" timeIntervalSinceReferenceDate="441763200">
+                                        <!--2015-01-01 00:00:00 +0000-->
+                                    </date>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES"/>
+                                </datePickerCell>
+                                <connections>
+                                    <action selector="setStartTime:" target="XfG-lQ-9wD" id="zO7-OO-BnA"/>
+                                </connections>
+                            </datePicker>
+                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DPC-jY-yw4">
+                                <rect key="frame" x="213" y="46" width="19" height="27"/>
+                                <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="1000" doubleValue="1" id="GJi-gl-bfR"/>
+                                <connections>
+                                    <action selector="setStepTime:" target="XfG-lQ-9wD" id="0rS-Fc-y6V"/>
+                                </connections>
+                            </stepper>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Sw-bB-Vuz">
+                                <rect key="frame" x="237" y="51" width="42" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="min to" id="8oz-JV-7oM">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sbc-gN-CCg">
+                                <rect key="frame" x="287" y="49" width="122" height="22"/>
+                                <datePickerCell key="cell" enabled="NO" alignment="left" drawsBackground="NO" datePickerStyle="textField" id="0BN-a1-ZAE">
+                                    <font key="font" metaFont="system"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="575740800">
+                                        <!--2019-03-31 16:00:00 +0000-->
+                                    </date>
+                                    <date key="minDate" timeIntervalSinceReferenceDate="441763200">
+                                        <!--2015-01-01 00:00:00 +0000-->
+                                    </date>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES"/>
+                                </datePickerCell>
+                                <connections>
+                                    <action selector="setStartTime:" target="XfG-lQ-9wD" id="0kL-OY-lxH"/>
+                                </connections>
+                            </datePicker>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9P7-Zu-yub">
+                                <rect key="frame" x="156" y="51" width="24" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="cut" id="ge5-FY-ZxQ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fGS-W2-pfT">
+                                <rect key="frame" x="186" y="51" width="24" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="Xem-fh-m6g"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="center" id="GtF-FE-OfM">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="xqK-no-UJG" firstAttribute="top" secondItem="RCe-9R-RXM" secondAttribute="bottom" constant="15" id="7Zf-12-DFM"/>
+                            <constraint firstItem="DPC-jY-yw4" firstAttribute="centerY" secondItem="fGS-W2-pfT" secondAttribute="centerY" id="0l8-3S-Itw"/>
+                            <constraint firstItem="I6Q-oF-GfF" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="109-Xm-1Jy"/>
                             <constraint firstItem="RCe-9R-RXM" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="9f8-th-lJJ"/>
+                            <constraint firstItem="DPC-jY-yw4" firstAttribute="leading" secondItem="fGS-W2-pfT" secondAttribute="trailing" constant="8" id="GRj-Ii-c56"/>
+                            <constraint firstItem="9P7-Zu-yub" firstAttribute="leading" secondItem="I6Q-oF-GfF" secondAttribute="trailing" constant="10" id="IfC-ia-hzc"/>
+                            <constraint firstItem="fGS-W2-pfT" firstAttribute="centerY" secondItem="9P7-Zu-yub" secondAttribute="centerY" id="L6K-qw-skZ"/>
+                            <constraint firstItem="7Sw-bB-Vuz" firstAttribute="centerY" secondItem="DPC-jY-yw4" secondAttribute="centerY" id="VGT-nX-jX0"/>
                             <constraint firstItem="pcg-UB-Itg" firstAttribute="leading" secondItem="xqK-no-UJG" secondAttribute="trailing" constant="20" id="VXG-Eh-jB3"/>
                             <constraint firstAttribute="bottom" secondItem="3cQ-XO-5dV" secondAttribute="bottom" constant="20" id="W6O-1k-7sD"/>
                             <constraint firstAttribute="trailing" secondItem="RCe-9R-RXM" secondAttribute="trailing" constant="20" id="XIK-Sg-C7k"/>
+                            <constraint firstItem="fGS-W2-pfT" firstAttribute="leading" secondItem="9P7-Zu-yub" secondAttribute="trailing" constant="10" id="XYb-7R-ORQ"/>
                             <constraint firstAttribute="bottom" secondItem="xqK-no-UJG" secondAttribute="bottom" constant="20" id="YI5-nL-99d"/>
                             <constraint firstItem="RCe-9R-RXM" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="ao4-Yb-SQm"/>
                             <constraint firstAttribute="trailing" secondItem="pcg-UB-Itg" secondAttribute="trailing" constant="20" id="axR-jY-k3X"/>
                             <constraint firstItem="3cQ-XO-5dV" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="fMk-Pn-hhg"/>
+                            <constraint firstItem="9P7-Zu-yub" firstAttribute="centerY" secondItem="I6Q-oF-GfF" secondAttribute="centerY" id="i2N-Ah-oRN"/>
+                            <constraint firstItem="sbc-gN-CCg" firstAttribute="centerY" secondItem="7Sw-bB-Vuz" secondAttribute="centerY" id="jQI-eC-5QR"/>
+                            <constraint firstItem="7Sw-bB-Vuz" firstAttribute="leading" secondItem="DPC-jY-yw4" secondAttribute="trailing" constant="10" id="jdr-2F-Jza"/>
+                            <constraint firstItem="3cQ-XO-5dV" firstAttribute="top" secondItem="I6Q-oF-GfF" secondAttribute="bottom" constant="10" id="pHl-qK-szt"/>
+                            <constraint firstItem="I6Q-oF-GfF" firstAttribute="top" secondItem="RCe-9R-RXM" secondAttribute="bottom" constant="20" id="vUI-jM-VVz"/>
                             <constraint firstAttribute="bottom" secondItem="pcg-UB-Itg" secondAttribute="bottom" constant="20" id="yfJ-Q8-2ov"/>
+                            <constraint firstItem="sbc-gN-CCg" firstAttribute="leading" secondItem="7Sw-bB-Vuz" secondAttribute="trailing" constant="10" id="zoa-yq-Whr"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="endTime" destination="sbc-gN-CCg" id="pCp-iy-t6T"/>
                         <outlet property="infoMessage" destination="3cQ-XO-5dV" id="5CF-L6-Ssw"/>
                         <outlet property="logNameTableView" destination="cja-8m-jtx" id="Mfh-XZ-uEU"/>
+                        <outlet property="starttime" destination="I6Q-oF-GfF" id="94h-KD-vpW"/>
+                        <outlet property="steptime" destination="fGS-W2-pfT" id="Ajd-eU-sj7"/>
+                        <outlet property="timestepper" destination="DPC-jY-yw4" id="6h9-C1-ppe"/>
                         <outlet property="viewDropper" destination="m2S-Jp-Qdl" id="rvX-df-HcR"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="750"/>
+            <point key="canvasLocation" x="74" y="956"/>
         </scene>
     </scenes>
 </document>

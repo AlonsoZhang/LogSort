@@ -12,13 +12,24 @@
 @interface ViewController : NSViewController<DragShowStationDelegate>{
     NSMutableArray *LogArray;
     NSMutableArray *LogPathArray;
+    NSDate *startdate;
+    NSDate *enddate;
+    NSDateFormatter *dateformatter;
 }
 
 @property (strong) IBOutlet ViewDropper *viewDropper;
 @property (weak) IBOutlet NSTableView *logNameTableView;
 @property (weak) IBOutlet NSTextField *infoMessage;
+@property (weak) IBOutlet NSDatePicker *starttime;
+@property (weak) IBOutlet NSDatePicker *endTime;
+@property (weak) IBOutlet NSTextField *steptime;
+@property (weak) IBOutlet NSStepper *timestepper;
+
+
 - (IBAction)reset:(NSButton *)sender;
 - (IBAction)sort:(NSButton *)sender;
+- (IBAction)setStartTime:(NSDatePicker *)sender;
+- (IBAction)setStepTime:(NSStepper *)sender;
 
 @end
 

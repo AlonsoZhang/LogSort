@@ -15,6 +15,14 @@
     [[self logNameTableView] becomeFirstResponder];
     self.viewDropper.delegate = self;
     LogArray = [[NSMutableArray alloc] init];
+    startdate = [[NSDate alloc]init];
+    enddate = [[NSDate alloc]init];
+    [_starttime setDateValue:[NSDate date]];
+    _timestepper.stringValue = @"5";
+    [_steptime setStringValue:_timestepper.stringValue];
+    [self setStartTime:_starttime];
+    dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
 }
 
 -(void)dragShowStation:(NSArray *)files {
@@ -66,24 +74,49 @@
 }
 
 - (IBAction)sort:(NSButton *)sender {
-    NSFileManager *sortfm = [NSFileManager defaultManager];
+    NSLog(@"start");
     NSArray *desktoppaths = NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES);
-    NSString * totalLog = [[NSString alloc]init];
     NSMutableArray *logdetailArray = [[NSMutableArray alloc]init];
     for (NSDictionary*eachLog in LogArray) {
         NSString *logInfo = [[NSString alloc]initWithContentsOfFile:[eachLog objectForKey:@"logPath"] encoding:NSUTF8StringEncoding error:nil];
-        NSArray * logdataArray = [logInfo componentsSeparatedByString:@"\n["];
-        //NSLog(@"%@",logdataArray);
-        for (NSString *logString in logdataArray) {
-            //NSLog(@"%@",[self findFirstinString:logString withregex:@"\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d{3}"]);
-            NSString *logtimestamp = [self findFirstinString:logString withregex:@"\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d{3}"];
-            NSString *loginfo = [self findFirstinString:logString withregex:@"(?<=] )[\\s\\S]*"];
-            NSMutableDictionary *detailLog = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:logtimestamp,loginfo, nil] forKeys:[NSArray arrayWithObjects:@"logTime",@"logInfo", nil]];
-            [logdetailArray addObject:detailLog];
+        NSMutableArray *logtimestampArray = [self findinString:logInfo withregex:@"\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d{3}"];
+        NSDate *firstdate = [dateformatter dateFromString:[logtimestampArray firstObject]];
+        NSDate *lastdate = [dateformatter dateFromString:[logtimestampArray lastObject]];
+        if (!([enddate timeIntervalSinceDate:firstdate] < 0 || [startdate timeIntervalSinceDate:lastdate] > 0)) {
+            NSLog(@"aaa");
+            for (NSString *logtimestamp in logtimestampArray) {
+                BOOL stepout = false;
+                if ([self judgeInTimeInterval:[dateformatter dateFromString:logtimestamp]]) {
+                    stepout = true;
+                    NSString *eachloginfo = [self findFirstinString:logInfo withregex:@"(?<=] )[\\s\\S]*(?<=[201)"];
+                    NSMutableDictionary *detailLog = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:logtimestamp,eachloginfo, nil] forKeys:[NSArray arrayWithObjects:@"logTime",@"logInfo", nil]];
+                    [logdetailArray addObject:detailLog];
+                }else{
+                    if (stepout) {
+                        break;
+                    }
+                }
+            }
+            NSLog(@"bbb");
             
-            //NSLog(@"%@",[self findFirstinString:logString withregex:@"(?<=] )[\\s\\S]*"]);
+//            NSArray * logdataArray = [logInfo componentsSeparatedByString:@"\n["];
+//            for (NSString *logString in logdataArray) {
+//                NSString *logtimestamp = [self findFirstinString:logString withregex:@"\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d{3}"];
+//                BOOL stepout = false;
+//                if ([self judgeInTimeInterval:[dateformatter dateFromString:logtimestamp]]){
+//                    stepout = true;
+//                    NSString *loginfo = [self findFirstinString:logString withregex:@"(?<=] )[\\s\\S]*"];
+//                    NSMutableDictionary *detailLog = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:logtimestamp,loginfo, nil] forKeys:[NSArray arrayWithObjects:@"logTime",@"logInfo", nil]];
+//                    [logdetailArray addObject:detailLog];
+//                }else{
+//                    if (stepout) {
+//                        break;
+//                    }
+//                }
+//            }
         }
     }
+    NSLog(@"%@",logdetailArray);
 //    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"logTime" ascending:YES];
 //    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 //    NSArray *sortedArray = [logdetailArray sortedArrayUsingDescriptors:sortDescriptors];
@@ -95,6 +128,29 @@
     finalString = [logdetailArray componentsJoinedByString:@"\n"];
     //[finalString writeToFile:[NSString stringWithFormat:@"%@/aaa.log",[desktoppaths objectAtIndex:0]] atomically:true];
     [finalString writeToFile:[NSString stringWithFormat:@"%@/aaa.log",[desktoppaths objectAtIndex:0]] atomically:true encoding:NSUTF8StringEncoding error:nil];
+}
+
+- (IBAction)setStartTime:(NSDatePicker *)sender {
+    NSDatePicker *datePicker = sender;
+    startdate = datePicker.dateValue;
+    enddate = [startdate dateByAddingTimeInterval:[_steptime intValue]*60];
+    [_endTime setDateValue:enddate];
+}
+
+- (IBAction)setStepTime:(NSStepper *)sender {
+    NSStepper *stepper = sender;
+    [_steptime setStringValue:stepper.stringValue];
+    [self setStartTime:_starttime];
+}
+
+- (BOOL)judgeInTimeInterval:(NSDate *)date{
+    if ([startdate timeIntervalSinceDate:date] > 0) {
+        return false;
+    }
+    if ([enddate timeIntervalSinceDate:date] < 0) {
+        return false;
+    }
+    return true;
 }
 
 -(NSString *)findFirstinString:(NSString *)TargetString withregex:(NSString *) regexString
@@ -112,6 +168,28 @@
         }
     }
     return @"";
+}
+
+-(NSMutableArray *)findinString:(NSString *)TargetString withregex:(NSString *) regexString
+{
+    NSError *error;
+    NSString *pattern = [NSString stringWithFormat:@"%@",regexString];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
+    NSMutableArray *temparr = [NSMutableArray new];
+    if (regex != nil)
+    {
+        NSArray *array = [regex matchesInString:TargetString options:0 range:NSMakeRange(0, TargetString.length)];
+        for (NSTextCheckingResult* b in array)
+        {
+            NSString * tmp = [TargetString substringWithRange:b.range] ;
+            if (tmp.length > 0)
+            {
+                [temparr addObject:tmp];
+            }
+        }
+        return temparr;
+    }
+    return nil;
 }
 
 #pragma mark NSTableViewDataSource Delegate
