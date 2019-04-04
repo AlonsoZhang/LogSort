@@ -24,6 +24,8 @@
 @property (weak) IBOutlet NSDatePicker *endTime;
 @property (weak) IBOutlet NSTextField *steptime;
 @property (weak) IBOutlet NSStepper *timestepper;
+@property (weak) IBOutlet NSButton *sortBtn;
+@property (weak) IBOutlet NSButton *resetBtn;
 
 
 - (IBAction)reset:(NSButton *)sender;

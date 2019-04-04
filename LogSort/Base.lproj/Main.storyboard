@@ -759,9 +759,9 @@
                                 </tableHeaderView>
                             </scrollView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3cQ-XO-5dV">
-                                <rect key="frame" x="18" y="20" width="254" height="19"/>
+                                <rect key="frame" x="18" y="20" width="244" height="19"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="1xm-IZ-txo"/>
+                                    <constraint firstAttribute="width" constant="240" id="c5J-W3-xMW"/>
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="SsM-PP-DHA">
                                     <font key="font" size="13" name="HelveticaNeue"/>
@@ -870,6 +870,7 @@
                             <constraint firstItem="DPC-jY-yw4" firstAttribute="leading" secondItem="fGS-W2-pfT" secondAttribute="trailing" constant="8" id="GRj-Ii-c56"/>
                             <constraint firstItem="9P7-Zu-yub" firstAttribute="leading" secondItem="I6Q-oF-GfF" secondAttribute="trailing" constant="10" id="IfC-ia-hzc"/>
                             <constraint firstItem="fGS-W2-pfT" firstAttribute="centerY" secondItem="9P7-Zu-yub" secondAttribute="centerY" id="L6K-qw-skZ"/>
+                            <constraint firstItem="xqK-no-UJG" firstAttribute="leading" secondItem="3cQ-XO-5dV" secondAttribute="trailing" constant="9" id="VCZ-Fs-4CH"/>
                             <constraint firstItem="7Sw-bB-Vuz" firstAttribute="centerY" secondItem="DPC-jY-yw4" secondAttribute="centerY" id="VGT-nX-jX0"/>
                             <constraint firstItem="pcg-UB-Itg" firstAttribute="leading" secondItem="xqK-no-UJG" secondAttribute="trailing" constant="20" id="VXG-Eh-jB3"/>
                             <constraint firstAttribute="bottom" secondItem="3cQ-XO-5dV" secondAttribute="bottom" constant="20" id="W6O-1k-7sD"/>
@@ -892,6 +893,8 @@
                         <outlet property="endTime" destination="sbc-gN-CCg" id="pCp-iy-t6T"/>
                         <outlet property="infoMessage" destination="3cQ-XO-5dV" id="5CF-L6-Ssw"/>
                         <outlet property="logNameTableView" destination="cja-8m-jtx" id="Mfh-XZ-uEU"/>
+                        <outlet property="resetBtn" destination="xqK-no-UJG" id="kBq-v3-SeT"/>
+                        <outlet property="sortBtn" destination="pcg-UB-Itg" id="Oz3-b3-c2f"/>
                         <outlet property="starttime" destination="I6Q-oF-GfF" id="94h-KD-vpW"/>
                         <outlet property="steptime" destination="fGS-W2-pfT" id="Ajd-eU-sj7"/>
                         <outlet property="timestepper" destination="DPC-jY-yw4" id="6h9-C1-ppe"/>
