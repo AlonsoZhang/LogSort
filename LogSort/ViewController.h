@@ -15,6 +15,7 @@
     NSDate *startdate;
     NSDate *enddate;
     NSDateFormatter *dateformatter;
+    BOOL defaultTime;
 }
 
 @property (strong) IBOutlet ViewDropper *viewDropper;

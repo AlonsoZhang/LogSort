@@ -20,8 +20,7 @@
     startdate = [[NSDate alloc]init];
     enddate = [[NSDate alloc]init];
     [_starttime setDateValue:[NSDate date]];
-    //NSDate *nowdate = [dateformatter dateFromString:@"2017-10-12 00:20:22.000"];
-    //[_starttime setDateValue:nowdate];
+    defaultTime = true;
     _timestepper.stringValue = @"5";
     [_steptime setStringValue:_timestepper.stringValue];
     [self setStartTime:_starttime];
@@ -60,6 +59,16 @@
                     }
                 }
                 if (checkExist) {
+                    if (defaultTime) {
+                        NSString *logInfo = [[NSString alloc]initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+                        NSMutableArray *logtimestampArray = [self findinString:logInfo withregex:@"\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d{3}"];
+                        if (logtimestampArray > 0) {
+                            defaultTime = false;
+                            NSDate *sdate = [dateformatter dateFromString:logtimestampArray[0]];
+                            [_starttime setDateValue:sdate];
+                            [self setStartTime:_starttime];
+                        }
+                    }
                     NSMutableDictionary *existLog = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:fileName,path, nil] forKeys:[NSArray arrayWithObjects:@"logName",@"logPath", nil]];
                     [LogArray addObject:existLog];
                 }
@@ -71,12 +80,14 @@
 }
 
 - (IBAction)reset:(NSButton *)sender {
+    defaultTime = true;
     [LogArray removeAllObjects];
     [self.logNameTableView reloadData];
 }
 
 - (IBAction)sort:(NSButton *)sender {
     self.infoMessage.stringValue = @"Sorting...";
+    NSDate *sdate = [NSDate date];
     [_sortBtn setEnabled:false];
     [_resetBtn setEnabled:false];
     [_timestepper setEnabled:false];
@@ -87,7 +98,7 @@
         for (NSDictionary*eachLog in self->LogArray) {
             NSString *logType = [[[eachLog objectForKey:@"logName"]componentsSeparatedByString:@" "]firstObject];
             NSString *logInfo = [[NSString alloc]initWithContentsOfFile:[eachLog objectForKey:@"logPath"] encoding:NSUTF8StringEncoding error:nil];
-            NSMutableArray *logtimestampArray = [self findinString:logInfo withregex:@"\\[\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d{3}\\][\\d\\D]*?(?=\\n\\[201)"];
+            NSMutableArray *logtimestampArray = [self findinString:logInfo withregex:@"\\[\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d{3}\\][\\d\\D]*?(?=\\n\\[201)|\\[\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d{3}\\][\\d\\D]*?(?=$)"];
             NSRange range = NSMakeRange(1, 23);
             NSDate *firstdate = [self->dateformatter dateFromString:[[logtimestampArray firstObject]substringWithRange:range]];
             NSDate *lastdate = [self->dateformatter dateFromString:[[logtimestampArray lastObject]substringWithRange:range]];
@@ -95,8 +106,10 @@
                 for (NSString *logtimestamp in logtimestampArray) {
                     BOOL stepout = false;
                     NSDate * logtimestampdate = [self->dateformatter dateFromString:[logtimestamp substringWithRange:range]];
-                    //NSString * eachlogInfo = [logtimestamp substringFromIndex:25];
-                    NSString * eachlogInfo = [self ReplaceString:[logtimestamp substringFromIndex:25]  withregex:@"\\n\\s+" withString:@"\n                          "];
+                    NSString * eachlogInfo = [logtimestamp substringFromIndex:25];
+                    if (![eachlogInfo hasPrefix:@" [SEND To CIM]"]&&![eachlogInfo hasPrefix:@" [Receive From CIM]"] ) {
+                        eachlogInfo = [self ReplaceString:eachlogInfo  withregex:@"\\n\\s+" withString:@"\n                          "];
+                    }
                     if ([self judgeInTimeInterval:logtimestampdate]) {
                         stepout = true;
                         NSMutableDictionary *detailLog = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:logtimestampdate,eachlogInfo,logType,nil] forKeys:[NSArray arrayWithObjects:@"logTime",@"logInfo",@"logType",nil]];
@@ -121,7 +134,7 @@
                 [fianlArray addObject:[NSString stringWithFormat:@"[%@]%@",[self->dateformatter stringFromDate:[eachlogdetail objectForKey:@"logTime"]],[eachlogdetail objectForKey:@"logInfo"]]];
             }else{
                 compareType = [eachlogdetail objectForKey:@"logType"];
-                NSString *typetitle = [self characterStringMainString:[NSString stringWithFormat:@"----------%@",[eachlogdetail objectForKey:@"logType"]] AddDigit:80 AddString:@"-" AddInPrefix:false];
+                NSString *typetitle = [self characterStringMainString:[NSString stringWithFormat:@"--------------------------%@",[eachlogdetail objectForKey:@"logType"]] AddDigit:80 AddString:@"-" AddInPrefix:false];
                 [fianlArray addObject:[NSString stringWithFormat:@"\n%@\n[%@]%@",typetitle,[self->dateformatter stringFromDate:[eachlogdetail objectForKey:@"logTime"]],[eachlogdetail objectForKey:@"logInfo"]]];
             }
         }
@@ -130,7 +143,8 @@
         [df setDateFormat:@"yyyyMMddHHmmss"];
         [finalString writeToFile:[NSString stringWithFormat:@"%@/%@.log",[desktoppaths objectAtIndex:0],[df stringFromDate:[NSDate date]]] atomically:true encoding:NSUTF8StringEncoding error:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.infoMessage.stringValue = @"Finish";
+            NSTimeInterval timeinterval = [[NSDate date]timeIntervalSinceDate:sdate];
+            self.infoMessage.stringValue = [NSString stringWithFormat:@"Finish, use %.1fs",timeinterval];
             [self.sortBtn setEnabled:true];
             [self.resetBtn setEnabled:true];
             [self.timestepper setEnabled:true];
