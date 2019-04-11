@@ -123,7 +123,8 @@
             }
         }
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"logTime" ascending:YES];
-        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"logType" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor,sortDescriptor2, nil];
         NSArray *sortedArray = [logdetailArray sortedArrayUsingDescriptors:sortDescriptors];
         logdetailArray = [sortedArray mutableCopy];
         NSString *finalString = [[NSString alloc]init];
